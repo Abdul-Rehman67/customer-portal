@@ -1,0 +1,1 @@
+export const dummyURL = 'https://randomuser.me/api/?results=10&inc=name,email,id,picture'
