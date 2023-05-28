@@ -19,6 +19,7 @@ const DeleteModal = ({isOpen,onClose,children,deletedItem}) => {
           "this will not update the localstorage because its comes from api and not present in storage you can check implementation and store also"
         );
         dispatch(deleteItem(deletedItem));
+        onClose()
       };
 
 

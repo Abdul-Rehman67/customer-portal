@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, updateItem } from "../../store/Slice/AddItem";
 
-const AddModal = ({ selectedItem, isEdit }) => {
+const AddModal = ({ selectedItem, isEdit,onClose }) => {
+  console.log(onClose)
   console.log(selectedItem);
   const dispatch = useDispatch();
 
@@ -32,14 +33,17 @@ const AddModal = ({ selectedItem, isEdit }) => {
       "this will not update the localstorage because its comes from api and not present in storage you can check implementation and store also"
     );
     dispatch(updateItem(selectedItem));
+    onClose()
+    
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    alert("Successfully Done!") 
     // Perform form submission or further processing with formData
     console.log(formData);
     dispatch(addItem(formData));
-    alert("customer added in storage through store successfully!")
+    onClose()
   };
   return (
     <>

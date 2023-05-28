@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getUser } from "../api/ApiFunctions";
 import { v4 as uuidv4 } from "uuid";
 import sortIcon from "../images/arrowsort.svg";
+import AddModal from "./Modal/AddModal";
+import BaseModal from "./Modal/BaseModal";
+import DeleteModal from "./Modal/DeleteModal"
 
 const Card = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +15,7 @@ const Card = () => {
   const [sortOrder, setSortOrder] = useState(null);
 
   const handleOpenModal = (item) => {
+
     setIsOpen(true);
     setSelectedItem(item);
   };
@@ -113,7 +117,7 @@ const Card = () => {
       </div>
 
       <div className="h-[75vh] w-full overflow-y-scroll mt-5">
-        {userData ? (
+        {userData.length>0 ? (
           userData.map((item) => (
             <div
               className="w-full -sm:w-11/12 bg-white shadow rounded p-6 items-center mb-2"
@@ -134,13 +138,13 @@ const Card = () => {
                 <div className="text-gray-600">{item.email}</div>
                 <div className="flex space-x-2">
                   <button
-                    className="text-[#008212] bg-[#39B54A] p-2 w-[8rem] rounded"
+                    className="text-[#008212] bg-[#8ac9ad] p-2 w-[8rem] rounded"
                     onClick={() => handleOpenModal(item)}
                   >
                     Edit
                   </button>
                   <button
-                    className="text-red-300 bg-[#D80000] p-2 w-[8rem] rounded"
+                    className="text-red-600 bg-[#f09595] p-2 w-[8rem] rounded"
                     onClick={() => handleDelete(item)}
                   >
                     Delete
@@ -155,6 +159,19 @@ const Card = () => {
       </div>
 
       {/* AddModal and DeleteModal components */}
+      <BaseModal
+        isOpen={isOpen}
+        onClose={handleCloseModal}
+        heading="Edit New Customer"
+      >
+        <AddModal selectedItem={selectedItem} isEdit={true} onClose={handleCloseModal} />
+      </BaseModal>
+
+      <DeleteModal   isOpen={isDelete}
+        onClose={handleCloseModal}>
+        {/* <h1>hi delete</h1> */}
+
+      </DeleteModal>
     </>
   );
 };

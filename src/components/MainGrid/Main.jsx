@@ -32,7 +32,7 @@ const Main = () => {
       </div>
       </div>
       <BaseModal isOpen={isOpen} onClose={handleCloseModal} topImage={true} heading={"Add New Customer"}>
-      <AddModal/>
+      <AddModal onClose={handleCloseModal}/>
       </BaseModal>
       
     </>
